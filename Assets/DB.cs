@@ -8,7 +8,7 @@ using System.Data;
 public class DB : MonoBehaviour
 {
     public InputField NombreARMA; // Añade el InputField para añadir el nombre del arma.
-    private string DBInventario = "URI=file:Inventario.db";
+    private string DBInventario = $"URI=file:{Application.streamingAssetsPath}/Inventario.db";
     // Start is called before the first frame update
     void Start()
     {
@@ -27,8 +27,8 @@ public class DB : MonoBehaviour
             //Crea un Objeto y le asigna el control de la base de datos.
             using (var command = connection.CreateCommand())
             {
-                command.CommandText = "CREATE TABLE IF NOT EXISTS weapons (name VARCHAR(20) NOT NULL);";
-                command.ExecuteNonQuery();
+                command.CommandText = "CREATE TABLE IF NOT EXISTS weapons (nombre VARCHAR(20) NOT NULL);";
+                command.ExecuteReader();
                 //Carga el comando SQL.
             }
             connection.Close(); //Cierra la Conexion con la DB.
